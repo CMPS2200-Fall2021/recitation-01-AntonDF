@@ -90,6 +90,7 @@ def time_search(search_fn, mylist, key):
 	return (end-start)*1000
 	### TODO
 	pass
+
 def test_time_search():
 	time_search(binary_search,[1,2,3,4,5],0)
 def compare_search(sizes=[1e1, 1e2, 1e3, 1e4, 1e5, 1e6, 1e7]):
@@ -107,9 +108,6 @@ def compare_search(sizes=[1e1, 1e2, 1e3, 1e4, 1e5, 1e6, 1e7]):
 	  indicating the number of milliseconds it takes
 	  for each method to run on each value of n
 	"""
-	tuples_list = ['']
-	for i in range(sizes):
-
 
 def print_results(results):
 	""" done """
@@ -126,4 +124,4 @@ def test_compare_search():
 	assert res[0][1] < 1
 	assert res[1][1] < 1
 
-test_time_search()
+test_binary_search()
