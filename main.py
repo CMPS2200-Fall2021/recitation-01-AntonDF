@@ -114,8 +114,8 @@ def compare_search(sizes=[1e1, 1e2, 1e3, 1e4, 1e5, 1e6, 1e7]):
 	i=0
 	for i in range(7):
 		n.append(sizes[i])
-		linear_search_time.append(linear_search(sizes[i],-1))
-		binary_search_time.append(binary_search(sizes[i],-1))
+		linear_search_time.append(time_search(linear_search, sizes[i],-1))
+		binary_search_time.append(time_search(binary_search, sizes[i],-1))
 	zip(n)
 	zip(linear_search_time)
 	zip(binary_search_time)
@@ -139,4 +139,4 @@ def test_compare_search():
 	assert res[0][1] < 1
 	assert res[1][1] < 1
 
-test_binary_search()
+test_compare_search()
