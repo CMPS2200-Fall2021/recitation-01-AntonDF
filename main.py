@@ -108,6 +108,18 @@ def compare_search(sizes=[1e1, 1e2, 1e3, 1e4, 1e5, 1e6, 1e7]):
 	  indicating the number of milliseconds it takes
 	  for each method to run on each value of n
 	"""
+	n = []
+	linear_search_time = []
+	binary_search_time = []
+	final = []
+	for i in range(sizes):
+		n.append(sizes[i])
+		linear_search_time.append(linear_search(sizes,-1))
+		binary_search_time.append(binary_search(sizes,-1))
+	final = [n,linear_search_time,binary_search_time]
+	return final
+
+
 
 def print_results(results):
 	""" done """
