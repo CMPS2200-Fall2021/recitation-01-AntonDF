@@ -3,7 +3,6 @@ CMPS 2200  Recitation 1
 """
 
 ### the only imports needed are here
-import tabulate
 import time
 ###
 
@@ -22,9 +21,9 @@ def test_linear_search():
 
 def binary_search(mylist, key):
 	""" done. """
-	return _binary_search(mylist, key, 0, len(mylist)-1)
+	return _binary_search(mylist, 0, len(mylist)-1, key)
 
-def _binary_search(mylist, key, left, right):
+def _binary_search(mylist, left, right, key):
 	"""
 	Recursive implementation of binary search.
 
@@ -37,6 +36,16 @@ def _binary_search(mylist, key, left, right):
 	Returns:
 	  index of key in mylist, or -1 if not present.
 	"""
+	if right >= left:
+		mid = (left + right) // 2
+		if mylist[mid] == key:
+			return mid
+		elif mylist[mid] > key:
+			return _binary_search(mylist, left, mid-1, key)
+		else:
+			return _binary_search(mylist, mid+1, right, key)
+	else:
+		return -1
 	### TODO
 	pass
 
@@ -45,7 +54,14 @@ def test_binary_search():
 	assert binary_search([1,2,3,4,5], 1) == 0
 	assert binary_search([1,2,3,4,5], 6) == -1
 	### TODO: add two more tests here.
-	pass
+	assert binary_search([1,2,3,4,5,6,8,9,10], 10) == 8
+	assert binary_search([1,2,3,4,5,6,7,8,9,10], 4) == 3
+
+	### TODO: answers for 4 and 5
+	# The worst case scenarios for binary search and for linear search is if the key is not in the datasets at all.
+	# The best case scenario is if the key is in the middle of the dataset during the first search. The best case scenario
+	# for linear search is if the key is the very first index in the set.
+
 
 
 def time_search(search_fn, mylist, key):
@@ -66,9 +82,16 @@ def time_search(search_fn, mylist, key):
 	  the number of milliseconds it takes to run this
 	  search function on this input.
 	"""
+
+	start = time.time()
+	search_fn(mylist, key)
+	end = time.time()
+	print("It took", ((end - start)*1000), " miliseconds to complete the search.")
+	return (end-start)*1000
 	### TODO
 	pass
-
+def test_time_search():
+	time_search(binary_search,[1,2,3,4,5],0)
 def compare_search(sizes=[1e1, 1e2, 1e3, 1e4, 1e5, 1e6, 1e7]):
 	"""
 	Compare the running time of linear_search and binary_search
@@ -84,8 +107,9 @@ def compare_search(sizes=[1e1, 1e2, 1e3, 1e4, 1e5, 1e6, 1e7]):
 	  indicating the number of milliseconds it takes
 	  for each method to run on each value of n
 	"""
-	### TODO
-	pass
+	tuples_list = ['']
+	for i in range(sizes):
+
 
 def print_results(results):
 	""" done """
@@ -101,3 +125,5 @@ def test_compare_search():
 	assert res[1][0] == 100
 	assert res[0][1] < 1
 	assert res[1][1] < 1
+
+test_time_search()
