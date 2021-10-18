@@ -7,6 +7,7 @@ import time
 ###
 
 def linear_search(mylist, key):
+
 	""" done. """
 	for i,v in enumerate(mylist):
 		if v == key:
@@ -86,14 +87,13 @@ def time_search(search_fn, mylist, key):
 	start = time.time()
 	search_fn(mylist, key)
 	end = time.time()
-	print("It took", ((end - start)*1000), " miliseconds to complete the search.")
+	#print("It took", ((end - start)*1000), " miliseconds to complete the search.")
 	return (end-start)*1000
-	### TODO
-	pass
+
 
 def test_time_search():
 	time_search(binary_search,[1,2,3,4,5],0)
-def compare_search(sizes=[1e1, 1e2, 1e3, 1e4, 1e5, 1e6, 1e7]):
+def compare_search(size=[1e1, 1e2, 1e3, 1e4, 1e5, 1e6, 1e7]):
 	"""
 	Compare the running time of linear_search and binary_search
 	for input sizes as given. The key for each search should be
@@ -112,13 +112,16 @@ def compare_search(sizes=[1e1, 1e2, 1e3, 1e4, 1e5, 1e6, 1e7]):
 	linear_search_time = []
 	binary_search_time = []
 	i=0
-	for i in range(7):
-		n.append(sizes[i])
-		linear_search_time.append(time_search(linear_search, sizes[i],-1))
-		binary_search_time.append(time_search(binary_search, sizes[i],-1))
+	for i in range(len(size)):
+		n.append(size[i])
+		linear_search_time.append(time_search(linear_search, size,-1))
+		binary_search_time.append(time_search(binary_search, size,-1))
 	zip(n)
 	zip(linear_search_time)
 	zip(binary_search_time)
+	print(n)
+	print(linear_search_time)
+	print(binary_search_time)
 	final = [n, linear_search_time, binary_search_time]
 	return final
 
@@ -132,7 +135,7 @@ def print_results(results):
 		tablefmt="github"))
 
 def test_compare_search():
-	res = compare_search(sizes=[10, 100])
+	res = compare_search(size=[10, 100])
 	print(res)
 	assert res[0][0] == 10
 	assert res[1][0] == 100
